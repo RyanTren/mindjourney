@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --foreground-rgb: 105, 110, 121;
+    --background-start-rgb: 24, 24, 24; /* #181818 */
+    --background-end-rgb: 119, 20, 176; /* #7714B0 */
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --foreground-rgb: 0, 0, 0;
+      --background-start-rgb: 24, 24, 24; /* #181818 */
+      --background-end-rgb: 119, 20, 176; /* #7714B0 */
+    }
+  }
+
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem; /* Adjust gap for smaller screens */
+    padding: 0.5rem; /* Adjust padding for smaller screens */
+  }
+  
+  .card-container .card {
+    width: calc(33.33% - 1rem); /* Adjust card width */
+    /* Add styles for card text size if needed */
+  }
+  
+  @media (max-width: 400px) {
+    .card-container .card {
+      width: 100%; /* Make cards full width on very small screens */
+      padding: 0.5rem; /* Reduce padding for smaller screens */
+      font-size: 0.75rem; /* Adjust text size */
+    }
+  }
+  
+  
+  body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+      to bottom,
+      rgb(var(--background-start-rgb)) 0%,   /* Start with dark color */
+      rgb(var(--background-start-rgb)) 70%,  /* Dark color up to 60% */
+      #181818 100%,  /* Transition color */
+      rgb(var(--background-end-rgb)) 100%    /* Purple from 80% to 100% */
+    );
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+  
+  @layer utilities {
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
