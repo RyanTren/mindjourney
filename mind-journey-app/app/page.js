@@ -192,7 +192,7 @@ export default function Home() {
         <title>mindjourney</title>
         <meta name="description" content="AI-powered mental health" />
       </Head>
-
+      
       <AppBar
         position="sticky"
         sx={{
@@ -200,38 +200,71 @@ export default function Home() {
           color: theme.palette.primary.contrastText,
         }}
       >
-        <Toolbar>
+        <Toolbar
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            flexWrap: 'nowrap',
+            alignItems: 'center',
+            '@media (max-width: 600px)': {
+              padding: '0 4px', // Adjust padding for smaller screens
+            },
+          }}
+        >
+          {/* Logo Section */}
           <Box
             sx={{
-              display: "flex",
-              alignItems: "center",
-              filter: "invert(1)",
-              mr: 1.25,
+              display: 'flex',
+              alignItems: 'center',
+              filter: 'invert(1)',
+              mr: 1,
+              flexShrink: 0, // Prevents shrinking of the logo
             }}
           >
-            <Image src="/moon.svg" alt="logo" width="20" height="20" />
+            <Image src="/moon.svg" alt="logo" width="15" height="15" />
           </Box>
 
-          <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
-            <Typography
+          {/* Title and Navigation Links */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexGrow: 1,
+              '@media (max-width: 600px)': {
+                flexGrow: 0,
+                fontSize: '0.7rem', // Smaller font size for mobile
+                flexBasis: 'auto', // Allow the box to shrink to its contents
+              },
+            }}
+          >
+            <Link
               variant="h6"
+              href="/"
               sx={{
                 color: theme.palette.primary.contrastText,
                 fontFamily: jost.style.fontFamily,
                 fontWeight: theme.typography.fontWeightBold,
-                mr: 2,
+                mr: 1,
+                fontSize: {
+                  xs: '0.5rem',
+                  sm: '1rem',
+                },
               }}
             >
               mindjourney
-            </Typography>
+            </Link>
             <Typography
               variant="h6"
               sx={{
                 color: theme.palette.primary.contrastText,
                 fontFamily: jost.style.fontFamily,
                 fontWeight: theme.typography.fontWeightLight,
-                ml: 1,
-                mr: 2,
+                mx: 1,
+                fontSize: {
+                  xs: '0.5rem',
+                  sm: '1rem',
+                },
               }}
             >
               |
@@ -243,9 +276,13 @@ export default function Home() {
                 color: theme.palette.primary.contrastText,
                 fontFamily: jost.style.fontFamily,
                 fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
+                textTransform: 'none',
+                fontSize: {
+                  xs: '0.5rem',
+                  sm: '0.9rem',
+                },
+                px: 0, // Reduced padding
               }}
-              style={{ zIndex: 10000 }}
             >
               features
             </Button>
@@ -256,9 +293,13 @@ export default function Home() {
                 color: theme.palette.primary.contrastText,
                 fontFamily: jost.style.fontFamily,
                 fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
+                textTransform: 'none',
+                fontSize: {
+                  xs: '0.5rem',
+                  sm: '0.9rem',
+                },
+                px: 0, // Reduced padding
               }}
-              style={{ zIndex: 10000 }}
             >
               pricing
             </Button>
@@ -269,49 +310,72 @@ export default function Home() {
                 color: theme.palette.primary.contrastText,
                 fontFamily: jost.style.fontFamily,
                 fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
+                textTransform: 'none',
+                fontSize: {
+                  xs: '0.5rem',
+                  sm: '0.9rem',
+                },
+                px: 0, // Reduced padding
               }}
-              style={{ zIndex: 10000 }}
             >
               contact
             </Button>
           </Box>
 
-          <SignedOut>
-            <Button
-              color="inherit"
-              href="sign-in"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
-              }}
-              style={{ zIndex: 10000 }}
-            >
-              {" "}
-              sign in
-            </Button>
-            <Button
-              color="inherit"
-              href="sign-up"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
-              }}
-              style={{ zIndex: 10000 }}
-            >
-              {" "}
-              sign up
-            </Button>
-          </SignedOut>
-          <SignedIn style={{ zIndex: 10000 }}>
-            <UserButton style={{ zIndex: 10000 }} />
-          </SignedIn>
+          {/* Sign In/Sign Up Section */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              '@media (max-width: 600px)': {
+                fontSize: '0.7rem', // Smaller font size for mobile
+              },
+            }}
+          >
+            <SignedOut>
+              <Button
+                color="inherit"
+                href="sign-in"
+                sx={{
+                  color: theme.palette.primary.contrastText,
+                  fontFamily: jost.style.fontFamily,
+                  fontWeight: theme.typography.fontWeightRegular,
+                  textTransform: 'none',
+                  fontSize: {
+                    xs: '0.5rem',
+                    sm: '0.9rem',
+                  },
+                  px: 0, // Reduced padding
+                }}
+              >
+                sign in
+              </Button>
+              <Button
+                color="inherit"
+                href="sign-up"
+                sx={{
+                  color: theme.palette.primary.contrastText,
+                  fontFamily: jost.style.fontFamily,
+                  fontWeight: theme.typography.fontWeightRegular,
+                  textTransform: 'none',
+                  fontSize: {
+                    xs: '0.5rem',
+                    sm: '0.9rem',
+                  },
+                  px: 0, // Reduced padding
+                }}
+              >
+                sign up
+              </Button>
+            </SignedOut>
+            <SignedIn>
+              <UserButton sx={{ zIndex: 10000 }} />
+            </SignedIn>
+          </Box>
         </Toolbar>
       </AppBar>
+
+
 
       <ShootingStars />
       <StarsBackground />
@@ -395,26 +459,13 @@ export default function Home() {
         <StickyScroll content={content} />
       </Grid>
 
-      {/* Pricing Card Preview */}
-      <Grid margin={10} spacing={10} gap="15" ml="10">
-        <Typography variant="h4" color={theme.palette.secondary.contrastText}>
-          Pricing
-        </Typography>
-        <HoverEffect
-          items={pricingCards}
-          sx={{
-            color: theme.palette.secondary.contrastText,
-            backgroundColor: theme.palette.primary.dark,
-          }}
-        />
-      </Grid>
-
+      {/* Waitlist Section */}
       <Box
-        height="80vh"
+        height="40vh"
         width="80vw"
         margin="auto"
         sx={{
-          backgroundColor: "#f5f5f5", // Light background color for better contrast
+          backgroundColor: "black", // Light background color for better contrast
           borderRadius: "12px",
           boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
           display: "flex",
@@ -427,10 +478,10 @@ export default function Home() {
       >
         <Typography
           variant="h4"
-          color="textPrimary"
           sx={{
             mb: 3,
             fontWeight: "bold",
+            color: theme.palette.secondary.contrastText,
           }}
         >
           Join the Waitlist
@@ -446,23 +497,23 @@ export default function Home() {
             mb: 3,
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "#ddd", // Light border color
+                borderColor: theme.palette.secondary.contrastText, // Light border color
                 borderRadius: "8px",
               },
               "&:hover fieldset": {
-                borderColor: "#888", // Darker border color on hover
+                borderColor: theme.palette.secondary.contrastText, // Darker border color on hover
               },
               "&.Mui-focused fieldset": {
-                borderColor: "#007bff", // Primary color for focused border
+                borderColor: theme.palette.secondary.contrastText, // Primary color for focused border
               },
               "& input": {
-                color: "#333",
+                color: theme.palette.secondary.contrastText,
                 fontFamily: "Arial, sans-serif",
               },
             },
           }}
           InputLabelProps={{
-            style: { color: "#333" },
+            style: { color: theme.palette.secondary.contrastText },
             fontFamily: "Arial, sans-serif",
           }}
         />
@@ -470,12 +521,30 @@ export default function Home() {
         <HoverBorderGradient
           containerClassName="rounded-full"
           as="button"
-          className="text-white flex items-center justify-center px-6 py-2 mt-2"
+          className="flex items-center justify-center px-4 py-1 mt-1"
           onClick={() => addEmail(email)}
+          sx={{
+            color: theme.palette.secondary.contrastText,
+
+          }}
         >
           Submit
         </HoverBorderGradient>
       </Box>
+
+      {/* Pricing Card Preview */}
+      <Grid margin={10} spacing={10} gap="15" ml="10">
+        <Typography variant="h4" color={theme.palette.secondary.contrastText}>
+          Pricing
+        </Typography>
+        <HoverEffect
+          items={pricingCards}
+          sx={{
+            color: theme.palette.secondary.contrastText,
+            backgroundColor: theme.palette.primary.dark,
+          }}
+        />
+      </Grid>
 
       {/* need to work on foot to match the styling on figma */}
       <footer>
