@@ -8,7 +8,7 @@ const jost = Jost({
 
 export const metadata = {
   title: "mindjourney",
-  description: "generated happiness",
+  description: "AI-Powered Mental Health Guidance App",
 };
 
 export default function RootLayout({ children }) {
