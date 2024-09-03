@@ -192,7 +192,7 @@ export default function Home() {
         <title>mindjourney</title>
         <meta name="description" content="AI-powered mental health" />
       </Head>
-      
+  
       <AppBar
         position="sticky"
         sx={{
@@ -200,44 +200,19 @@ export default function Home() {
           color: theme.palette.primary.contrastText,
         }}
       >
-        <Toolbar
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            flexWrap: 'nowrap',
-            alignItems: 'center',
-            '@media (max-width: 600px)': {
-              padding: '0 4px', // Adjust padding for smaller screens
-            },
-          }}
-        >
-          {/* Logo Section */}
+        <Toolbar>
           <Box
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              filter: 'invert(1)',
-              mr: 1,
-              flexShrink: 0, // Prevents shrinking of the logo
+              display: "flex",
+              alignItems: "center",
+              filter: "invert(1)",
+              mr: 1.25,
             }}
           >
-            <Image src="/moon.svg" alt="logo" width="15" height="15" />
+            <Image src="/moon.svg" alt="logo" width="20" height="20" />
           </Box>
 
-          {/* Title and Navigation Links */}
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexGrow: 1,
-              '@media (max-width: 600px)': {
-                flexGrow: 0,
-                fontSize: '0.7rem', // Smaller font size for mobile
-                flexBasis: 'auto', // Allow the box to shrink to its contents
-              },
-            }}
-          >
+          <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
             <Link
               variant="h6"
               href="/"
@@ -245,11 +220,7 @@ export default function Home() {
                 color: theme.palette.primary.contrastText,
                 fontFamily: jost.style.fontFamily,
                 fontWeight: theme.typography.fontWeightBold,
-                mr: 1,
-                fontSize: {
-                  xs: '0.5rem',
-                  sm: '1rem',
-                },
+                mr: 2,
               }}
             >
               mindjourney
@@ -260,11 +231,8 @@ export default function Home() {
                 color: theme.palette.primary.contrastText,
                 fontFamily: jost.style.fontFamily,
                 fontWeight: theme.typography.fontWeightLight,
-                mx: 1,
-                fontSize: {
-                  xs: '0.5rem',
-                  sm: '1rem',
-                },
+                ml: 1,
+                mr: 2,
               }}
             >
               |
@@ -276,13 +244,9 @@ export default function Home() {
                 color: theme.palette.primary.contrastText,
                 fontFamily: jost.style.fontFamily,
                 fontWeight: theme.typography.fontWeightRegular,
-                textTransform: 'none',
-                fontSize: {
-                  xs: '0.5rem',
-                  sm: '0.9rem',
-                },
-                px: 0, // Reduced padding
+                textTransform: "none",
               }}
+              style={{ zIndex: 10000 }}
             >
               features
             </Button>
@@ -293,13 +257,9 @@ export default function Home() {
                 color: theme.palette.primary.contrastText,
                 fontFamily: jost.style.fontFamily,
                 fontWeight: theme.typography.fontWeightRegular,
-                textTransform: 'none',
-                fontSize: {
-                  xs: '0.5rem',
-                  sm: '0.9rem',
-                },
-                px: 0, // Reduced padding
+                textTransform: "none",
               }}
+              style={{ zIndex: 10000 }}
             >
               pricing
             </Button>
@@ -310,72 +270,49 @@ export default function Home() {
                 color: theme.palette.primary.contrastText,
                 fontFamily: jost.style.fontFamily,
                 fontWeight: theme.typography.fontWeightRegular,
-                textTransform: 'none',
-                fontSize: {
-                  xs: '0.5rem',
-                  sm: '0.9rem',
-                },
-                px: 0, // Reduced padding
+                textTransform: "none",
               }}
+              style={{ zIndex: 10000 }}
             >
               contact
             </Button>
           </Box>
 
-          {/* Sign In/Sign Up Section */}
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              '@media (max-width: 600px)': {
-                fontSize: '0.7rem', // Smaller font size for mobile
-              },
-            }}
-          >
-            <SignedOut>
-              <Button
-                color="inherit"
-                href="sign-in"
-                sx={{
-                  color: theme.palette.primary.contrastText,
-                  fontFamily: jost.style.fontFamily,
-                  fontWeight: theme.typography.fontWeightRegular,
-                  textTransform: 'none',
-                  fontSize: {
-                    xs: '0.5rem',
-                    sm: '0.9rem',
-                  },
-                  px: 0, // Reduced padding
-                }}
-              >
-                sign in
-              </Button>
-              <Button
-                color="inherit"
-                href="sign-up"
-                sx={{
-                  color: theme.palette.primary.contrastText,
-                  fontFamily: jost.style.fontFamily,
-                  fontWeight: theme.typography.fontWeightRegular,
-                  textTransform: 'none',
-                  fontSize: {
-                    xs: '0.5rem',
-                    sm: '0.9rem',
-                  },
-                  px: 0, // Reduced padding
-                }}
-              >
-                sign up
-              </Button>
-            </SignedOut>
-            <SignedIn>
-              <UserButton sx={{ zIndex: 10000 }} />
-            </SignedIn>
-          </Box>
+          <SignedOut>
+            <Button
+              color="inherit"
+              href="sign-in"
+              sx={{
+                color: theme.palette.primary.contrastText,
+                fontFamily: jost.style.fontFamily,
+                fontWeight: theme.typography.fontWeightRegular,
+                textTransform: "none",
+              }}
+              style={{ zIndex: 10000 }}
+            >
+              {" "}
+              sign in
+            </Button>
+            <Button
+              color="inherit"
+              href="sign-up"
+              sx={{
+                color: theme.palette.primary.contrastText,
+                fontFamily: jost.style.fontFamily,
+                fontWeight: theme.typography.fontWeightRegular,
+                textTransform: "none",
+              }}
+              style={{ zIndex: 10000 }}
+            >
+              {" "}
+              sign up
+            </Button>
+          </SignedOut>
+          <SignedIn style={{ zIndex: 10000 }}>
+            <UserButton style={{ zIndex: 10000 }} />
+          </SignedIn>
         </Toolbar>
       </AppBar>
-
-
 
       <ShootingStars />
       <StarsBackground />
