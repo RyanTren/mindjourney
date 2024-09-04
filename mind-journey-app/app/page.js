@@ -12,7 +12,7 @@ import {
   useUser,
   UserButton,
 } from "@clerk/nextjs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -145,6 +145,11 @@ export const pricingCards = [
 export default function Home() {
   const { isLoading, isSignedIn, user } = useUser();
   const [email, setEmail] = useState("");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+      setIsClient(true); // Client-side only
+  }, []);
 
   // Create a function that stores the user's email in Firestore
   const addEmail = async (email) => {
@@ -188,15 +193,15 @@ export default function Home() {
       style={{ padding: 0 }}
       className={jost.className}
     >
-      <Head maxWidth="100vw">
+      <Head>
         <title>mindjourney</title>
-        <meta name="description" content="AI-powered mental health" />
+        <meta name="description" content="Bring you AI-Powered Mental Health Solutions" />
       </Head>
-  
+
       <AppBar
         position="sticky"
         sx={{
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: "#181818",
           color: theme.palette.primary.contrastText,
         }}
       >
@@ -246,7 +251,6 @@ export default function Home() {
                 fontWeight: theme.typography.fontWeightRegular,
                 textTransform: "none",
               }}
-              style={{ zIndex: 10000 }}
             >
               features
             </Button>
@@ -259,7 +263,6 @@ export default function Home() {
                 fontWeight: theme.typography.fontWeightRegular,
                 textTransform: "none",
               }}
-              style={{ zIndex: 10000 }}
             >
               pricing
             </Button>
@@ -272,45 +275,19 @@ export default function Home() {
                 fontWeight: theme.typography.fontWeightRegular,
                 textTransform: "none",
               }}
-              style={{ zIndex: 10000 }}
             >
               contact
             </Button>
           </Box>
-
-          <SignedOut>
-            <Button
-              color="inherit"
-              href="sign-in"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
-              }}
-              style={{ zIndex: 10000 }}
-            >
-              {" "}
-              sign in
-            </Button>
-            <Button
-              color="inherit"
-              href="sign-up"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
-              }}
-              style={{ zIndex: 10000 }}
-            >
-              {" "}
-              sign up
-            </Button>
+          
+          {/* Test without conditional rendering */}
+          {/* <SignedOut>
+            <Button color="inherit" href="sign-in">sign in</Button>
+            <Button color="inherit" href="sign-up">sign up</Button>
           </SignedOut>
-          <SignedIn style={{ zIndex: 10000 }}>
-            <UserButton style={{ zIndex: 10000 }} />
-          </SignedIn>
+          <SignedIn>
+            <UserButton />
+          </SignedIn> */}
         </Toolbar>
       </AppBar>
 
@@ -604,13 +581,13 @@ export default function Home() {
             }}
           >
             {[
-              { name: "features", path: "http://localhost:3000/features" },
-              { name: "pricing", path: "http://localhost:3000/pricing" },
+              { name: "features", path: "/features" },
+              { name: "pricing", path: "/pricing" },
               {
                 name: "github",
-                path: "https://github.com/MasonMos/mind-journey",
+                path: "https://github.com/RyanTren/mindjourney",
               },
-              { name: "contact", path: "http://localhost:3000/contact" },
+              { name: "contact", path: "0/contact" },
             ].map((link) => (
               <Link
                 key={link.name}

@@ -311,6 +311,12 @@ export default function BlogPage(){
         }
     }
 
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true); // Client-side only
+    }, []);
+
 
     return(
     <Container 
@@ -319,125 +325,122 @@ export default function BlogPage(){
         className={jost.className}
     >
         <AppBar
-        position="sticky"
-        sx={{
-          backgroundColor: "#181818",
-          color: theme.palette.primary.contrastText,
-        }}
+      position="sticky"
+      sx={{
+        backgroundColor: "#181818",
+        color: theme.palette.primary.contrastText,
+      }}
+    >
+      <Toolbar>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            filter: "invert(1)",
+            mr: 1.25,
+          }}
         >
-        <Toolbar>
-          <Box
+          <Image src="/moon.svg" alt="logo" width="20" height="20" />
+        </Box>
+
+        <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
+          <Link
+            variant="h6"
+            href="/"
             sx={{
-              display: "flex",
-              alignItems: "center",
-              filter: "invert(1)",
-              mr: 1.25,
+              color: theme.palette.primary.contrastText,
+              fontFamily: jost.style.fontFamily,
+              fontWeight: theme.typography.fontWeightBold,
+              mr: 2,
             }}
           >
-            <Image src="/moon.svg" alt="logo" width="20" height="20" />
-          </Box>
+            mindjourney
+          </Link>
+          <Typography
+            variant="h6"
+            sx={{
+              color: theme.palette.primary.contrastText,
+              fontFamily: jost.style.fontFamily,
+              fontWeight: theme.typography.fontWeightLight,
+              ml: 1,
+              mr: 2,
+            }}
+          >
+            |
+          </Typography>
+          <Button
+            color="inherit"
+            href="features"
+            sx={{
+              color: theme.palette.primary.contrastText,
+              fontFamily: jost.style.fontFamily,
+              fontWeight: theme.typography.fontWeightRegular,
+              textTransform: "none",
+            }}
+          >
+            features
+          </Button>
+          <Button
+            color="inherit"
+            href="pricing"
+            sx={{
+              color: theme.palette.primary.contrastText,
+              fontFamily: jost.style.fontFamily,
+              fontWeight: theme.typography.fontWeightRegular,
+              textTransform: "none",
+            }}
+          >
+            pricing
+          </Button>
+          <Button
+            color="inherit"
+            href="contact"
+            sx={{
+              color: theme.palette.primary.contrastText,
+              fontFamily: jost.style.fontFamily,
+              fontWeight: theme.typography.fontWeightRegular,
+              textTransform: "none",
+            }}
+          >
+            contact
+          </Button>
+        </Box>
 
-          <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1 }}>
-            <Link
-              variant="h6"
-              href="/"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightBold,
-                mr: 2,
-              }}
-            >
-              mindjourney
-            </Link>
-            <Typography
-              variant="h6"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightLight,
-                ml: 1,
-                mr: 2,
-              }}
-            >
-              |
-            </Typography>
-            <Button
-              color="inherit"
-              href="features"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
-              }}
-              style={{ zIndex: 10000 }}
-            >
-              features
-            </Button>
-            <Button
-              color="inherit"
-              href="pricing"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
-              }}
-              style={{ zIndex: 10000 }}
-            >
-              pricing
-            </Button>
-            <Button
-              color="inherit"
-              href="contact"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
-              }}
-              style={{ zIndex: 10000 }}
-            >
-              contact
-            </Button>
-          </Box>
-
-          <SignedOut>
-            <Button
-              color="inherit"
-              href="sign-in"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
-              }}
-              style={{ zIndex: 10000 }}
-            >
-              {" "}
-              sign in
-            </Button>
-            <Button
-              color="inherit"
-              href="sign-up"
-              sx={{
-                color: theme.palette.primary.contrastText,
-                fontFamily: jost.style.fontFamily,
-                fontWeight: theme.typography.fontWeightRegular,
-                textTransform: "none",
-              }}
-              style={{ zIndex: 10000 }}
-            >
-              {" "}
-              sign up
-            </Button>
-          </SignedOut>
-          <SignedIn style={{ zIndex: 10000 }}>
-            <UserButton style={{ zIndex: 10000 }} />
-          </SignedIn>
-        </Toolbar>
-        </AppBar>
+        {isClient && (
+          <>
+            <SignedOut>
+              <Button
+                color="inherit"
+                href="sign-in"
+                sx={{
+                  color: theme.palette.primary.contrastText,
+                  fontFamily: jost.style.fontFamily,
+                  fontWeight: theme.typography.fontWeightRegular,
+                  textTransform: "none",
+                }}
+              >
+                sign in
+              </Button>
+              <Button
+                color="inherit"
+                href="sign-up"
+                sx={{
+                  color: theme.palette.primary.contrastText,
+                  fontFamily: jost.style.fontFamily,
+                  fontWeight: theme.typography.fontWeightRegular,
+                  textTransform: "none",
+                }}
+              >
+                sign up
+              </Button>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
             
             <StyledButton sx={{position: "fixed", bottom: "16px", right: "16px", zIndex: 100}} onClick={() => {handleOpen()}}>
                 +
