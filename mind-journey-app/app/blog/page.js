@@ -1,19 +1,30 @@
-'use client'
+'use client';
+
+import "../other.css";
+
 import Image from "next/image";
+import Link from "next/link";
+import { Jost } from "next/font/google";
+
 import {React, useState, useEffect } from "react";
+
 import { createTheme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
-import { Jost } from "next/font/google";
+
 import { SignedIn, SignedOut, isSignedIn, user, useUser, UserButton } from "@clerk/nextjs";
 import { AppBar, Toolbar, Box, Button, Container, Typography, Grid, Card, Modal, TextField } from "@mui/material";
-import { LayoutGrid } from "@/components/ui/layout-grid";
-import {firestore} from '@/firebase';
-import { Input } from "postcss";
-import { getDocs, query, collection, setDoc, doc, getDoc } from "firebase/firestore";
 import Pagination from '@mui/material/Pagination';
 import { motion } from "framer-motion";
-import Link from "next/link";
+
+import { LayoutGrid } from "@/components/ui/layout-grid";
+
+import { Input } from "postcss";
+
+import { firestore } from '@/firebase';
+import { getDocs, query, collection, setDoc, doc } from "firebase/firestore";
+import db from '@/firebase';
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -109,33 +120,56 @@ export default function BlogPage(){
     const [cards, setCards] = useState([])
     const [promptList, setPromptList] = useState([])
 
-    const [cardBackgrounds, setCardBackgrounds] = useState(["Calm-Card-1.jpg", "Calm-Card-2.jpg", "Calm-Card-3.jpg", "Calm-Card-4.jpg", "Calm-Card-5.jpg"])
+    const [cardBackgrounds, setCardBackgrounds] = useState(["/images/Calm-Card-1.jpg", "/images/Calm-Card-2.jpg", "/images/Calm-Card-3.jpg", "/images/Calm-Card-4.jpg", "/images/Calm-Card-5.jpg"])
 
+    
 
+    // const updatePromptList = async() => {
+    // const snapshot = query(collection(firestore, "Entries"));
+    // const docs = await getDocs(snapshot);
+    //   const inventoryList = []
 
-    const updatePromptList = async() => {
-      const snapshot = query(collection(firestore, "Entries"));
-      const docs = await getDocs(snapshot);
-      const inventoryList = []
+    //   docs.forEach((doc) => {
+    //     inventoryList.push({
+    //       name: doc.id,
+    //       ...doc.data(),
+    //     })
+    //   })
 
-      docs.forEach((doc) => {
-        inventoryList.push({
-          name: doc.id,
-          ...doc.data(),
-        })
-      })
+    //   setPromptList(inventoryList)
+    // }
 
-      setPromptList(inventoryList)
-    }
+    const updatePromptList = async () => {
+        const snapshot = query(collection(db, 'Entries'));
+        const docs = await getDocs(snapshot);
+        const inventoryList = [];
+      
+        docs.forEach((doc) => {
+          inventoryList.push({
+            name: doc.id,
+            ...doc.data(),
+          });
+        });
+      
+        setPromptList(inventoryList);
+    };
+
+    // const createPrompt = async(item) => {
+    //   await setDoc(doc(collection(firestore, "Entries"), item.title), {content: item.content, user: user.id}, {merge: true})
+    //   updatePromptList()
+    // }
+
+    const createPrompt = async (item) => {
+        await setDoc(doc(collection(db, 'Entries'), item.title), {
+          content: item.content,
+          user: user.id,
+        }, { merge: true });
+        updatePromptList();
+    };
 
     const handlePageChange = (event, value) => {
       console.log("Page Information: ", event, " ", value)
       setPage(value)
-    }
-
-    const createPrompt = async(item) => {
-      await setDoc(doc(collection(firestore, "Entries"), item.title), {content: item.content, user: user.id}, {merge: true})
-      updatePromptList()
     }
 
     const createCards = () => {
@@ -223,13 +257,13 @@ export default function BlogPage(){
 
     return(
         <Box maxWidth="100vw" style={{padding: 0}} className={jost.className} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-            <AppBar
+        <AppBar
         position="sticky"
         sx={{
           backgroundColor: "#181818",
           color: theme.palette.primary.contrastText,
         }}
-      >
+        >
         <Toolbar>
           <Box
             sx={{
@@ -349,7 +383,7 @@ export default function BlogPage(){
                     <Typography variant="h3" color="white">Prompt of the Day</Typography>
                 </div>
             </Box>
-            <StyledButton sx={{position: "fixed", bottom: "16px", right: "16px", zIndex: 100}} onClick={() => {handleOpen()}}>
+            <StyledButton sx={{position: "fixed", bottom: "8px", right: "8px", zIndex: 100}} onClick={() => {handleOpen()}}>
                 +
             </StyledButton>
             
