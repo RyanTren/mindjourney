@@ -150,10 +150,10 @@ export const SkeletonOne = () => {
           <div className="flex flex-1 w-full h-full flex-col space-y-2  ">
             {/* TODO */}
             <Image
-              src="/linear.webp"
+              src="/images/blogdisplay.png"
               alt="header"
-              width={800}
-              height={800}
+              width={250}
+              height={500}
               className="h-full w-full aspect-square object-cover object-left-top rounded-sm" />
           </div>
         </div>
@@ -252,9 +252,9 @@ export const SkeletonTwo = () => {
             <Image
               src={image}
               alt="bali images"
-              width="500"
-              height="500"
-              className="rounded-lg h-20 w-20 md:h-40 md:w-40 object-cover flex-shrink-0"
+              width="50"
+              height="50"
+              className="rounded-lg h-20 w-20 md:h-20 md:w-20 object-cover flex-shrink-0"
             />
           </motion.div>
         ))}
