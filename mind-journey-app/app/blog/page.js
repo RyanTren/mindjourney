@@ -9,7 +9,6 @@ import { Jost } from "next/font/google";
 import { SignedIn, SignedOut, isSignedIn, user, useUser, UserButton } from "@clerk/nextjs";
 import { AppBar, Toolbar, Box, Button, Container, Typography, Grid, Card, Modal, TextField } from "@mui/material";
 import { LayoutGrid } from "@/components/ui/layout-grid";
-// import { AuroraBackground } from "@/components/ui/aurora-background";
 import {firestore} from '@/firebase';
 import { Input } from "postcss";
 import { getDocs, query, collection, setDoc, doc, getDoc } from "firebase/firestore";
